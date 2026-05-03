@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.15)
 project(detect)
+
 find_package(PNG REQUIRED)
 find_package(JPEG REQUIRED)
+find_package(OpenMP REQUIRED)
 
 add_subdirectory(utils)
 
@@ -12,4 +14,10 @@ include_directories(${JPEG_INCLUDE_DIR})
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 
 add_executable(${PROJECT_NAME} main.cc)
-target_link_libraries(${PROJECT_NAME} PNG::PNG JPEG::JPEG utils)
+
+target_link_libraries(${PROJECT_NAME}
+    PNG::PNG
+    JPEG::JPEG
+    utils
+    OpenMP::OpenMP_CXX
+)
